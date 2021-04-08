@@ -1,0 +1,181 @@
+.jsonEditor {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.jsonEditor * {
+  font-size: 1rem;
+}
+
+.jsonEditor label {
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+}
+
+.jsonEditor select {
+  cursor: pointer;
+  width: 100%;
+}
+
+.jsonEditor select:disabled {
+  cursor: not-allowed;
+}
+
+.jsonEditor tr {
+  border-bottom: 1px solid #ccc;
+}
+
+.jsonEditor td {
+  padding: 6px;
+  border-right: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+.jsonEditor td:first-child {
+  padding: 0 6px;
+}
+
+.jsonEditor td:last-child {
+  border-right: none;
+}
+
+.jsonEditor td.string, .jsonEditor td.number, .jsonEditor td.boolean {
+  padding: 0;
+}
+
+.indent {
+  flex-grow: 1;
+  border-left: 1px solid #eee;
+  padding-left: 16px;
+  display: flex;
+  align-items: stretch;
+}
+
+.collapseIcon, .collapsePlaceholder {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  font-size: 0.7em;
+  padding-top: 0.45em;
+}
+
+.collapseIcon {
+  cursor: pointer;
+}
+
+.keyCell {
+  width: 40%;
+}
+
+.keyCellContent {
+  width: 100%;
+  height: 100%;
+  min-height: 30px;
+  display: flex;
+  align-items: stretch;
+}
+
+.actions {
+  margin-left: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity ease 0.2s;
+}
+
+.keyCell:hover .actions {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.typeCell {
+  width: 10%;
+  min-width: 80px;
+}
+
+.valueCell {
+  width: 50%;
+}
+
+.name {
+  flex-grow: 1;
+}
+
+.nameText {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.nameText.editable {
+  cursor: pointer;
+}
+
+.nameText.locked {
+  cursor: default;
+}
+
+.nameInput {
+  width: auto;
+  height: 100%;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.nameInput:focus {
+  outline: none;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #1a0dab;
+}
+
+.nameInput.invalid {
+  background: tomato;
+  border-bottom: 1px solid red;
+}
+
+.actionButton {
+  background: white;
+  border: 1px solid #666;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.actionButton:first-child {
+  margin-left: 0;
+}
+
+.actionButton:disabled {
+  cursor: not-allowed;
+}
+
+.valueInput {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.string, .number, .boolean {
+  padding: 0;
+}
+
+.number input, .string input {
+  background: none;
+  border: none;
+  padding: 6px;
+  color: inherit;
+}
+
+.checkBoxLabel {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
