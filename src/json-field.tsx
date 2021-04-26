@@ -55,6 +55,7 @@ const JSONField = (props: Props) => {
   const depth = props.depth || 0
   const newKeyDefault = props.newKeyDefault || 'newKey'
 
+  const [firstRenderCompleted, setFirstRenderCompleted] = useState(false)
   const [editingName, setEditingName] = useState(false)
   const [name, _setName] = useState(props.name || (props.isRoot ? 'Root' : ''))
   const [value, setValue] = useState(props.value)
@@ -63,6 +64,8 @@ const JSONField = (props: Props) => {
 
   const isObjectOrArray = !!value && (type === 'object' || type === 'array')
   const childrenCount = isObjectOrArray ? Object.keys(value!).length : 0
+
+  useEffect(() => setFirstRenderCompleted(true), [])
 
   useEffect(() => _setName(props.name!), [props.name])
   useEffect(() => {
@@ -117,8 +120,7 @@ const JSONField = (props: Props) => {
           else newValue = value?.toString() || ''
           break
         case 'child':
-          if (isObjectOrArray)
-            newValue = Object.values(value!)[0]
+          if (isObjectOrArray) newValue = Object.values(value!)[0]
           break
         case 'parse':
           try {
@@ -228,10 +230,13 @@ const JSONField = (props: Props) => {
   }
 
   const renderArray = (array: any[]) => {
+    if (!firstRenderCompleted) {
+      return []
+    }
     return array.map((entry, i) => {
       const path = props.path + `[${i}]`
       if (props.filteredPaths && !props.filteredPaths?.includes(path)) {
-        return
+        return null
       }
       return (
         <JSONField
@@ -272,11 +277,14 @@ const JSONField = (props: Props) => {
   }
 
   const renderObject = (object: any) => {
+    if (!firstRenderCompleted) {
+      return []
+    }
     return Object.keys(object).map((name, i) => {
       if (props.hiddenKeys?.includes(name)) return null
       const path = props.path + '.' + name
       if (props.filteredPaths && !props.filteredPaths?.includes(path)) {
-        return
+        return null
       }
       return (
         <JSONField
